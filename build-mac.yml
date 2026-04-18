@@ -3,8 +3,6 @@ name: Build macOS
 on:
   push:
     branches: [main]
-    paths:
-      - 'dist/mac/**'
   workflow_dispatch:
 
 jobs:
@@ -25,18 +23,16 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip install --upgrade pip
-          pip install -r dist/mac/requirements.txt
+          pip install -r requirements.txt
 
       - name: Copy .pyw as .py for PyInstaller
-        run: cp dist/mac/FotoPIMmac.pyw dist/mac/FotoPIMmac.py
+        run: cp FotoPIMmac.pyw FotoPIMmac.py
 
       - name: Build with PyInstaller
-        run: |
-          cd dist/mac
-          pyinstaller FotoPIMmac.spec --clean --noconfirm
+        run: pyinstaller FotoPIMmac.spec --clean --noconfirm
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: FotoPIM-macOS-arm64
-          path: dist/mac/dist/FotoPIM.app
+          path: dist/FotoPIM.app
