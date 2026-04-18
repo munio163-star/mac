@@ -1,0 +1,7 @@
+Pillow
+customtkinter
+tkinterdnd2
+pyvips
+numpy
+send2trash
+pyinstaller
